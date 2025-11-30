@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #002a46;
+            --accent: #e74c3c;
+            --light-bg: #c7dbdf;
+            --dark-bg: #2b2d2e6e;
+            --text-dark: #000000;
+            --text-light: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #000f6b 0%, #20063a 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark-bg) 100%);
+            color: var(--text-light);
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Profile Section */
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .profile-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-info h2 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .profile-info .title {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .profile-info p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .social-links a img {
+            width: 22px;
+            height: 22px;
+            margin-top: 9px; /* centers the icon vertically */
+            filter: brightness(0) invert(1); /* makes icon white */
+        }
+
+        .insta-icon {
+            width: 22px;
+            height: 22px;
+            margin-top: 9px;
+            filter: brightness(0) invert(1);
+        }
+
+
+        /* Sections */
+        section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            animation: slideIn 0.5s ease;
+        }
+
+        section h3 {
+            font-size: 1.8em;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, var(--secondary), #5dade2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-card h4 {
+            margin-bottom: 8px;
+        }
+
+        .skill-level {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* language Section */
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .language-card {
+            background: linear-gradient(135deg, var(--secondary), #5dade2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-card h4 {
+            margin-bottom: 8px;
+        }
+
+        .language-level {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* Education Section */
+        .edu-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .edu-item h4 {
+            color: var(--primary);
+            font-size: 1.1em;
+        }
+
+        .edu-item .degree {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .edu-item .year {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 5px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .project-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .project-tech {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            background: var(--accent);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        /* certificate Section */
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+        }
+
+        .certificate-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 5px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .certificate-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .certificate-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .certificate-card p {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .certificate-tech {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            background: var(--accent);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        /* Contact Form */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: var(--text-light);
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        /* Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                gap: 10px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+
+            section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Krishna Rakesh Barhate</h1>
+            <nav>
+                <a href="#profile">Profile</a>
+                <a href="#language">Language</a>
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#projects">Projects</a>
+                <a href="#certificate">certificate</a>
+            </nav>
+        </header>
+
+        <!-- Profile Card -->
+        <section id="profile" class="profile-card">
+            <div class="profile-image">
+                <img src="maza paor.jpg" alt="Profile Photo">
+            </div>
+
+            <div class="profile-info">
+                <h2>Krishna Rakesh Barhate</h2>
+                <p class="title">TY Diploma in Electronics and Computer Engineering</p>
+                <p>📞:- +91 9370833811</p>
+                <p>✉️:- barhatekrishna51@gmail.com</p>
+                <p>I am a dedicated Electronics and Computer Engineering student with strong interest 
+                    in embedded systems, microcontrollers and system-level concepts. I enjoy working on practical, 
+                    hands-on projects—especially Arduino-based automation systems, solar tracking and basic AI applications. 
+                    I have completed industrial training in Solar EPC installation and maintenance, which strengthened my technical
+                    understanding and field experience.
+                    <br>I am skilled in Python, Java, C/C++, data analysis and Excel and also continuously work on improving my problem-solving 
+                    and project-building abilities. I believe in learning by doing and always aim to create solutions that are simple, efficient 
+                    and useful.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/krishna-barhate-4587a8394" target="_blank" title="LinkedIn">in</a>
+                    <a href="https://www.instagram.com/krishna81913?igsh=MXNyMGF5bzhtMzhvMA==" target="_blank" title="Instagram"><img src="insta.png" alt="Instagram" class="insta-icon"></a>
+                    <a href="Krishna resume.pdf" target="_blank">Resume</a>
+                </div>
+            </div>
+        </section>
+
+        <!--language-->
+        <section id="language">
+            <h3>Language</h3>
+            <div class="language-grid">
+                <div class="language-card">
+                    <h4>Marathi (मराठी)</h4>
+                    <div class="language-level">Master</div>
+                </div>
+                <div class="language-card">
+                    <h4>Hindi (हिन्दी)</h4>
+                    <div class="language-level">Advanced</div>
+                </div>
+                <div class="language-card">
+                    <h4>English</h4>
+                    <div class="language-level">Advanced</div>
+                </div>
+                <div class="language-card">
+                    <h4>Japanese (日本語)</h4>
+                    <div class="language-level">beginner</div>
+                </div>
+            </div>                        
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h3>Technical Skills</h3>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h4>Python</h4>
+                    <div class="skill-level">Intermediate</div>
+                </div>
+                <div class="skill-card">
+                    <h4>Embedded System</h4>
+                    <div class="skill-level">Intermediate</div>
+                </div>
+                <div class="skill-card">
+                    <h4>JAVA</h4>
+                    <div class="skill-level">Intermediate</div>
+                </div>
+                <div class="skill-card">
+                    <h4>C/C++</h4>
+                    <div class="skill-level">Intermediate</div>
+                </div>
+                <div class="skill-card">
+                    <h4>Data Analysis</h4>
+                    <div class="skill-level">Intermediate</div>
+                </div>
+                <div class="skill-card">
+                    <h4>Excel</h4>
+                    <div class="skill-level">Advanced</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h3>Education</h3>
+            <div class="edu-item">
+                <h4>Diploma in Electronics and Computer Engineering</h4>
+                <div class="degree">TY Year (Third Year)</div>
+                <div>KCE's College of Engineering and Management, Jalgaon</div>
+                <div class="year">Expected Graduation: 2026</div>
+            </div>
+            <div class="edu-item">
+                <h4>12 Week Industrial Training</h4>
+                <div class="degree">SOYO Systems</div>
+                <div>Solar EPC Installation & Maintenance</div>
+                <div class="year">Duration:Jun 2025 - Aug 2025</div>
+            </div>
+             <div class="edu-item">
+                <h4>Secondary Education</h4>
+                <div class="degree">SSC (10th)</div>
+                <div>KCE A.T.Zambre High School, Jalgaon</div>
+                <div>percentage:- 83.40%</div>
+                <div class="year">Complited in 2022</div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h3>Diploma final Year Project</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h4>DIY solar Tracking using Arduino Uno</h4>
+                    <p>Designed an automated solar panel tracking system with light sensors and servo motors that follows the sun's position to maximize energy efficiency.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Arduino Uno</span>
+                        <span class="tech-tag">Solar Traking</span>
+                        <span class="tech-tag">Servo Motor</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+           
+        <section id="projects">
+            <h3>Acadamic Microprojects</h3>
+            <div  class="projects-grid"> 
+                <div class="project-card">
+                    <h4>Basic Voise Assistance using Pythone</h4>
+                    <p>Creating the Presonal Voice assistace that to show time, Open the Google and YouTube, play Music and Video As per the User commands.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Pythone</span>
+                        <span class="tech-tag">speech_recognition</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4>Seminar on Drone Technoknowlogy</h4>
+                    <p>seminar on Drone Techknowlogy to state that the use of Drones, challenges face by drone, Its Aplication and advantages,disadvantages.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Documentation</span>
+                        <span class="tech-tag">Drone Technology</span>
+                        <span class="tech-tag">Presentation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificate">
+             <h3>Certificates</h3>
+            <div class="certificate-grid">
+                <div class="certificate-card">
+                    <h4>BUSINESS  Email certificate</h4>
+                    <p>The BUSINESS  email certificate is issued by the HP Lite by its course.</p>
+                    <div class="certificate-tech">
+                        <a class="tech-tag" href="BUSINESS  email certificate.pdf" target="_blank">Certificate</a>
+                    </div>
+                </div>
+                <div class="certificate-card">
+                    <h4>Business communication</h4>
+                    <p>The BUSINESS communication certificate is issued by the HP Lite by its course.</p>
+                    <div class="certificate-tech">
+                        <a class="tech-tag" href="Business communication certificate.pdf" target="_blank">Certificate</a>
+                    </div>
+                </div>
+                <div class="certificate-card">
+                    <h4>Introduction to Cybersecurity Awareness</h4>
+                    <p>The Introduction to Cybersecurity Awareness is issued by the HP Lite to Awareness about the Cybersecurity.</p>
+                    <div class="certificate-tech">
+                        <a class="tech-tag" href="Introduction to Cybersecurity Awareness.pdf" target="_blank">Certificate</a>
+                    </div>
+                </div>
+                <div class="certificate-card">
+                    <h4>Effective Presentations</h4>
+                    <p>The Effective Presentations certificate is issued by the HP Lite to make precentation more representitive.</p>
+                    <div class="certificate-tech">
+                        <a class="tech-tag" href="Effective Presentations certificate.pdf" target="_blank">Certificate</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Krishna Rakesh Barhate. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling for nav links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
